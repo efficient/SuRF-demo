@@ -2,16 +2,16 @@
 An interactive demo app for the **Succinct Range Filter (SuRF)**.
 
 ## Run
- * Open web/index.html
+ * Open docs/index.html
 
-## Build (not required if you are using pre-built web/surf.js)
+## Build (not required if you are using pre-built docs/surf.js)
  * Install [Emscripten](https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html) and activate it
  * Run build\_js.sh
 
 
 ## License
 
-### All source code except for web/\*/dist
+### All source code except for docs/\*/dist
 
     Copyright 2018, Carnegie Mellon University
 
