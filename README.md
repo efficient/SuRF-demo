@@ -11,6 +11,8 @@ An interactive demo app for the **Succinct Range Filter (SuRF)**.
 
 ## License
 
+### All source code except for web/\*/dist
+
     Copyright 2018, Carnegie Mellon University
 
     Licensed under the Apache License, Version 2.0 (the "License");
