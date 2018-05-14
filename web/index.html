@@ -1,0 +1,269 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+
+	<title>SuRF Demo</title>
+
+	<script src="vue/dist/vue.js"></script>
+	<script src="vue2vis/dist/vue2vis.js"></script>
+	<link rel="stylesheet" href="vue2vis/dist/vue2vis.css" />
+
+	<!-- <script src="vue/dist/vue.min.js"></script>
+	<script src="vue2vis/dist/vue2vis.min.js"></script>
+	<link rel="stylesheet" href="vue2vis/dist/vue2vis.min.css" /> -->
+
+	<link type="text/css" rel="stylesheet" href="bootstrap-vue/dist/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="bootstrap-vue/dist/bootstrap-vue.css" />
+	<script src="bootstrap-vue/dist/polyfill.min.js"></script>
+	<script src="bootstrap-vue/dist/bootstrap-vue.js"></script>
+
+	<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+	<script type="text/x-template" id="surf-template">
+		<b-container fluid>
+			<b-row class="h-100">
+				<b-col style="max-width: 20em;">
+					<h1>SuRF Demo</h1>
+
+					<div class="float-right">
+						<b-badge variant="primary" href="https://db.cs.cmu.edu/papers/2018/mod601-zhangA-hm.pdf" target="_new">PDF</b-badge>
+						<b-badge variant="primary" href="https://github.com/efficient/SuRF" target="_new">GitHub</b-badge>
+					</div>
+
+					<div>
+						Input (one key per line):
+						<b-form-textarea v-model="input" max-rows="15"></b-form-textarea>
+					</div>
+
+					<div>
+						Suffix type:
+						<b-form-checkbox-group v-model="suffix_type">
+							<b-form-checkbox value="hash">Hash</b-form-checkbox>
+							<b-form-checkbox value="real">Real</b-form-checkbox>
+						</b-form-checkbox-group>
+					</div>
+
+					<div>
+						Suffix length:
+						<b-form-input v-model="suffix_len" type="number" :disabled="suffix_type.length == 0"></b-form-input>
+						<b-badge variant="danger" v-if="!(this.suffix_len >= 1 && this.suffix_len <= 64)">Must be an integer between 1 and 64</b-badge>
+					</div>
+
+					<hr/>
+
+					<div>
+						Query type:
+						<b-form-radio-group v-model="query_type">
+							<b-form-radio value="none">None</b-form-radio>
+							<b-form-radio value="point">Point</b-form-radio>
+							<b-form-radio value="range">Range</b-form-radio>
+						</b-form-radio-group>
+					</div>
+
+					<div v-if="query_type == 'point'">
+						<div>
+							Key:
+							<b-form-input v-model="point_query_key"></b-form-input>
+						</div>
+						<div>
+							Answer: {{ lookupKeyResult ? 'True' : 'False' }}
+							<b-badge pill variant="success" v-if="lookupKeyResult == exactLookupKeyResult">correct</b-badge>
+							<b-badge pill variant="warning" v-else>
+								{{ lookupKeyResult == true ? 'false positive' : 'false negative' }}
+							</b-badge>
+						</div>
+					</div>
+
+					<div v-if="query_type == 'range'">
+						<div>
+							Start key:
+							<b-form-checkbox v-model="range_query_begin_inclusive">inclusive</b-form-checkbox>
+							<b-form-input v-model="range_query_begin_key"></b-form-input>
+						</div>
+						<div>
+							End key:
+							<b-form-checkbox v-model="range_query_end_inclusive">inclusive</b-form-checkbox>
+							<b-form-input v-model="range_query_end_key"></b-form-input>
+						</div>
+						<div>
+							Answer: {{ lookupRangeResult[0] ? 'True' : 'False' }}
+							<b-badge pill variant="success" v-if="lookupRangeResult[0] == exactLookupRangeResult[0]">correct</b-badge>
+							<b-badge pill variant="warning" v-else>
+								{{ lookupRangeResult[0] == true ? 'false positive' : 'false negative' }}
+							</b-badge>
+						</div>
+					</div>
+
+					<hr/>
+
+					<b-form-checkbox v-model="show_tree">Show tree</b-form-checkbox>
+					<b-form-checkbox v-model="show_details">Show details</b-form-checkbox>
+				</b-col>
+
+				<b-col v-if="show_tree" class="h-100">
+					<network ref="network" :nodes="nodes_edges[0]" :edges="nodes_edges[1]" :options="options"></network>
+				</b-col>
+
+				<b-col v-if="show_details" class="h-100" style="overflow: scroll;">
+					<b-container>
+						Keys:
+						<b-container v-for="(key, index) in keys">
+							#{{ index }}: {{ key }}
+						</b-container>
+					</b-container>
+
+					<b-container>
+						<b-form-checkbox v-model="include_dense">Include dense</b-form-checkbox>
+					</b-container>
+
+					<b-container>
+						Sparse-dense ratio:
+						<b-form-input v-model.number="sparse_dense_ratio" type="number" :disabled="!include_dense"></b-form-input>
+						<b-badge variant="danger" v-if="!(this.sparse_dense_ratio >= 0)">Must be a non-negative integer</b-badge>
+					</b-container>
+
+					<hr/>
+
+					<b-container>
+						Tree height: {{ tree_height }}
+					</b-container>
+
+					<b-container>
+						Sparse start level: {{ sparse_start_level }}
+					</b-container>
+
+					<b-container>
+						Serialized size: {{ serialized_size }} bytes
+					</b-container>
+
+					<b-container>
+						Memory usage (including overhead): {{ memory_usage }} bytes
+					</b-container>
+
+					<hr/>
+
+					<b-container>
+						D-Labels:
+						<b-container>
+							<template v-for="(array, index) in bitmap_labels">
+								{{ formatBitvector(array, 256) }}
+							</template>
+						</b-container>
+					</b-container>
+
+					<b-container>
+						D-HasChild:
+						<b-container>
+							<template v-for="(array, index) in bitmap_child_indicator_bits">
+								{{ formatBitvector(array, 256) }}
+							</template>
+						</b-container>
+					</b-container>
+
+					<b-container>
+						D-IsPrefixKey:
+						<b-container>
+							<template v-for="(array, index) in prefixkey_indicator_bits">
+								{{ formatBitvectorPartial(array, bitmap_labels[index].length * 32 / 256, 1) }}
+							</template>
+						</b-container>
+					</b-container>
+
+					<b-container>
+						D-Values:
+						<b-container>
+							<template v-for="(array, index) in suffixes" v-if="index < sparse_start_level">
+								{{ formatBitvectorPartial(array, suffix_counts[index] * actual_suffix_len, actual_suffix_len) }}
+							</template>
+						</b-container>
+					</b-container>
+
+					<hr/>
+
+					<b-container>
+						S-Labels:
+						<b-container>
+							<template v-for="(array, index) in labels" v-if="index >= sparse_start_level">
+								<template v-for="value in array">
+									{{ value != getTerminator() ? String.fromCharCode(value) : '$' }}
+								</template>
+							</template>
+						</b-container>
+					</b-container>
+
+					<b-container>
+						S-HasChild:
+						<b-container>
+							<template v-for="(array, index) in child_indicator_bits" v-if="index >= sparse_start_level">
+								{{ formatBitvectorPartial(array, labels[index].length, 1) }}
+							</template>
+						</b-container>
+					</b-container>
+
+					<b-container>
+						S-LOUDS:
+						<b-container>
+							<template v-for="(array, index) in louds_bits" v-if="index >= sparse_start_level">
+								{{ formatBitvectorPartial(array, labels[index].length, 1) }}
+							</template>
+						</b-container>
+					</b-container>
+
+					<b-container>
+						S-Values:
+						<b-container>
+							<template v-for="(array, index) in suffixes" v-if="index >= sparse_start_level">
+								{{ formatBitvectorPartial(array, suffix_counts[index] * actual_suffix_len, actual_suffix_len) }}
+							</template>
+						</b-container>
+					</b-container>
+
+					<!-- <hr/>
+
+					<b-container>
+						Suffix counts:
+						<b-container v-for="(value, index) in suffix_counts">
+							Level-{{ index }}:&nbsp;{{ value }}
+						</b-container>
+					</b-container>
+
+					<b-container>
+						Node counts:
+						<b-container v-for="(value, index) in node_counts">
+							Level-{{ index }}:&nbsp;{{ value }}
+						</b-container>
+					</b-container> -->
+
+					<hr/>
+
+					<b-container>
+						Copyright 2018, Carnegie Mellon University
+					</b-container>
+				</b-col>
+			</b-row>
+		</b-container>
+	</script>
+
+	<b-container id="app" fluid>
+		<surf initial_input="f
+far
+fas
+fast
+fat
+s
+top
+toy
+trie
+trip
+try" initial_point_query_key="fas" initial_range_query_begin_key="top" initial_range_query_end_key="toy"></surf>
+	</b-container>
+
+	<script src="surf.js"></script>
+
+	<script src="main.js"></script>
+</body>
+
+</html>
