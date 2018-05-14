@@ -1,10 +1,17 @@
 # SuRF Demo
+
 An interactive demo app for the **Succinct Range Filter (SuRF)**.
+
+ * [SIGMOD paper](http://www.cs.cmu.edu/%7Ehuanche1/publications/surf\_paper.pdf)
+ * [SuRF](https://github.com/efficient/SuRF)
+
 
 ## Run
  * Open docs/index.html
 
 ## Build (not required if you are using pre-built docs/surf.js)
+ * Clone [SuRF](https://github.com/efficient/SuRF)
+ * Clone [SuRF-demo](https://github.com/efficient/SuRF) under SuRF
  * Install [Emscripten](https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html) and activate it
  * Run build\_js.sh
 
