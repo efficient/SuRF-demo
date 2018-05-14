@@ -29,8 +29,6 @@ An interactive demo app for the **Succinct Range Filter (SuRF)**.
 
 ### vue.js
 
-    The MIT License (MIT)
-
     Copyright (c) 2013-present, Yuxi (Evan) You
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
