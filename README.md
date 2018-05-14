@@ -1,12 +1,12 @@
 # SuRF Demo
 An interactive demo app for the **Succinct Range Filter (SuRF)**.
 
-# Run
-    Open web/index.html
+## Run
+ * Open web/index.html
 
-# Build (not required if you are using pre-built web/surf.js)
-    Install [Emscripten](https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html) and activate it
-    Run build_js.sh
+## Build (not required if you are using pre-built web/surf.js)
+ * Install [Emscripten](https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html) and activate it
+ * Run build\_js.sh
 
 
 ## License
