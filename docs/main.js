@@ -599,7 +599,9 @@ Vue.component('surf', {
         if (iter.isValid()) {
           key = iter.getKey();
           var compare = iter.compare(range_query_end_key);
-          if (range_query_end_inclusive) {
+          if (compare == Module.surf_kCouldBePositive) {
+            result = true;
+          } else if (range_query_end_inclusive) {
             result = compare <= 0;
           } else {
             result = compare < 0;
