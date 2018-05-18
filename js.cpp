@@ -126,6 +126,7 @@ EMSCRIPTEN_BINDINGS(surf) {
   // config.hpp
   // ==========
   emscripten::constant("surf_kTerminator", surf::kTerminator);
+  emscripten::constant("surf_kCouldBePositive", surf::kCouldBePositive);
 
   emscripten::constant("surf_kIncludeDense", surf::kIncludeDense);
 
