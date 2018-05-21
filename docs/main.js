@@ -608,24 +608,25 @@ Vue.component('surf', {
     },
     lookupRange: function(range_query_begin_key, range_query_begin_inclusive, range_query_end_key, range_query_end_inclusive) {
       if (this.surf.filter === null) {
-        return [false, ''];
+        return [false, []];
       } else {
         var keys = [];
         var iter = this.surf.filter.moveToKeyGreaterThan(range_query_begin_key, range_query_begin_inclusive);
-        var result = false;
         while (iter.isValid()) {
-          var key = iter.getKey();
           var compare = iter.compare(range_query_end_key);
-          if (compare == Module.surf_kCouldBePositive) {;
+          if (compare == Module.surf_kCouldBePositive) {
+            // Potentially false positive
           } else if (range_query_end_inclusive) {
-            if (!(compare <= 0))
+            if (!(compare <= 0)) {
               break;
+            }
           } else {
-            if (!(compare < 0))
+            if (!(compare < 0)) {
               break;
+            }
           }
-          keys.push(key);
-          iter.next(1);  // 1 is a dummy argument
+          keys.push(iter.getKey());
+          iter.next(1); // 1 is a dummy argument
         }
         iter.delete();
         return [keys.length > 0, keys];
@@ -639,27 +640,33 @@ Vue.component('surf', {
     exactLookupRange: function(range_query_begin_key, range_query_begin_inclusive, range_query_end_key, range_query_end_inclusive) {
       var i;
       var keys = [];
-      var result = false;
       if (range_query_begin_inclusive) {
         for (i = 0; i < this.keys.length; i++) {
-          key = this.keys[i];
+          var key = this.keys[i];
           if (key >= range_query_begin_key) {
             break;
           }
         }
       } else {
         for (i = 0; i < this.keys.length; i++) {
-          key = this.keys[i];
+          var key = this.keys[i];
           if (key > range_query_begin_key) {
             break;
           }
         }
       }
-      for (; i < this.keys.length; i++) {
-        key = this.keys[i];
-        if ((range_query_end_inclusive && key <= range_query_end_key) || (!range_query_end_inclusive && key < range_query_end_key)) {
-          keys.push(key);
+      while (i < this.keys.length) {
+        var key = this.keys[i];
+        if (range_query_end_inclusive) {
+          if (!(key <= range_query_end_key))
+            break;
+        } else {
+          if (!(key < range_query_end_key)) {
+            break;
+          }
         }
+        keys.push(key);
+        i++;
       }
       return [keys.length > 0, keys];
     },
@@ -668,17 +675,21 @@ Vue.component('surf', {
     highlightQueryResult: function() {
       var highlight = false;
       var result = false;
-      var keys = [];
+      var keys;
       if (this.surf.filter !== null) {
         if (this.query_type == 'point') {
           highlight = true;
           result = this.surf.filter.lookupKey(this.point_query_key);
-          keys.push(this.point_query_key);
+          keys = [this.point_query_key];
         } else if (this.query_type == 'range') {
           highlight = true;
           var lookup_result = this.lookupRange(this.range_query_begin_key, this.range_query_begin_inclusive, this.range_query_end_key, this.range_query_end_inclusive);
-          keys = lookup_result[1];
           result = lookup_result[0];
+          if (result) {
+            keys = lookup_result[1];
+          } else {
+            keys = [this.range_query_begin_key];
+          }
         }
       }
 
