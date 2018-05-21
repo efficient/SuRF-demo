@@ -610,22 +610,25 @@ Vue.component('surf', {
       if (this.surf.filter === null) {
         return [false, ''];
       } else {
-        var key = '';
+        var keys = [];
         var iter = this.surf.filter.moveToKeyGreaterThan(range_query_begin_key, range_query_begin_inclusive);
         var result = false;
-        if (iter.isValid()) {
-          key = iter.getKey();
+        while (iter.isValid()) {
+          var key = iter.getKey();
           var compare = iter.compare(range_query_end_key);
-          if (compare == Module.surf_kCouldBePositive) {
-            result = true;
+          if (compare == Module.surf_kCouldBePositive) {;
           } else if (range_query_end_inclusive) {
-            result = compare <= 0;
+            if (!(compare <= 0))
+              break;
           } else {
-            result = compare < 0;
+            if (!(compare < 0))
+              break;
           }
+          keys.push(key);
+          iter.next(1);  // 1 is a dummy argument
         }
         iter.delete();
-        return [result, key];
+        return [keys.length > 0, keys];
       }
     },
 
@@ -635,7 +638,7 @@ Vue.component('surf', {
     },
     exactLookupRange: function(range_query_begin_key, range_query_begin_inclusive, range_query_end_key, range_query_end_inclusive) {
       var i;
-      var key;
+      var keys = [];
       var result = false;
       if (range_query_begin_inclusive) {
         for (i = 0; i < this.keys.length; i++) {
@@ -652,28 +655,29 @@ Vue.component('surf', {
           }
         }
       }
-      if (i < this.keys.length) {
+      for (; i < this.keys.length; i++) {
+        key = this.keys[i];
         if ((range_query_end_inclusive && key <= range_query_end_key) || (!range_query_end_inclusive && key < range_query_end_key)) {
-          result = true;
+          keys.push(key);
         }
       }
-      return [result, key];
+      return [keys.length > 0, keys];
     },
 
     // Node and edge highlighter
     highlightQueryResult: function() {
       var highlight = false;
       var result = false;
-      var key = '';
+      var keys = [];
       if (this.surf.filter !== null) {
         if (this.query_type == 'point') {
           highlight = true;
           result = this.surf.filter.lookupKey(this.point_query_key);
-          key = this.point_query_key;
+          keys.push(this.point_query_key);
         } else if (this.query_type == 'range') {
           highlight = true;
           var lookup_result = this.lookupRange(this.range_query_begin_key, this.range_query_begin_inclusive, this.range_query_end_key, this.range_query_end_inclusive);
-          key = lookup_result[1];
+          keys = lookup_result[1];
           result = lookup_result[0];
         }
       }
@@ -732,37 +736,41 @@ Vue.component('surf', {
       }
 
       if (highlight) {
-        var node_idx = 0;
-        var i;
-        for (i = 0; i < key.length; i++) {
-          var child = full_nodes[node_idx].children[key[i]];
-          if (child !== undefined) {
-            nodes[node_idx].borderWidth = borderWidth;
-            nodes[node_idx].font = traversalFont;
-            nodes[node_idx].color = traversalColor;
-            edges[child.edge_idx].width = borderWidth;
-            node_idx = child.node_idx;
+        for (var key_idx = 0; key_idx < keys.length; key_idx++) {
+          var key = keys[key_idx];
+
+          var node_idx = 0;
+          var i;
+          for (i = 0; i < key.length; i++) {
+            var child = full_nodes[node_idx].children[key[i]];
+            if (child !== undefined) {
+              nodes[node_idx].borderWidth = borderWidth;
+              nodes[node_idx].font = traversalFont;
+              nodes[node_idx].color = traversalColor;
+              edges[child.edge_idx].width = borderWidth;
+              node_idx = child.node_idx;
+            } else {
+              break;
+            }
+          }
+          if (i == key.length) {
+            var child = full_nodes[node_idx].children[Module.surf_kTerminator];
+            if (child !== undefined) {
+              nodes[node_idx].borderWidth = borderWidth;
+              nodes[node_idx].font = traversalFont;
+              nodes[node_idx].color = traversalColor;
+              edges[child.edge_idx].width = borderWidth;
+              node_idx = child.node_idx;
+            }
+          }
+          nodes[node_idx].borderWidth = borderWidth;
+          if (result) {
+            nodes[node_idx].font = successfulArrivalFont;
+            nodes[node_idx].color = successfulArrivalColor;
           } else {
-            break;
+            nodes[node_idx].font = failedArrivalFont;
+            nodes[node_idx].color = failedArrivalColor;
           }
-        }
-        if (i == key.length) {
-          var child = full_nodes[node_idx].children[Module.surf_kTerminator];
-          if (child !== undefined) {
-            nodes[node_idx].borderWidth = borderWidth;
-            nodes[node_idx].font = traversalFont;
-            nodes[node_idx].color = traversalColor;
-            edges[child.edge_idx].width = borderWidth;
-            node_idx = child.node_idx;
-          }
-        }
-        nodes[node_idx].borderWidth = borderWidth;
-        if (result) {
-          nodes[node_idx].font = successfulArrivalFont;
-          nodes[node_idx].color = successfulArrivalColor;
-        } else {
-          nodes[node_idx].font = failedArrivalFont;
-          nodes[node_idx].color = failedArrivalColor;
         }
       }
       return [nodes, edges];
