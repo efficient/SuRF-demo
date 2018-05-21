@@ -69,12 +69,26 @@ Vue.component('surf', {
       'range_query_end_inclusive': this.initial_range_query_end_inclusive,
       'show_tree': this.initial_show_tree,
       'show_details': this.initial_show_details,
-      // Do not use the below directly; they are kept for destruction.
-      'filter_': null,
-      'filter_ah_': null,
-      'builder_': null,
-      'builder_ah_': null
     };
+  },
+
+  created: function() {
+    this.filter_ = null;
+    this.filter_ah_ = null;
+    this.builder_ = null;
+    this.builder_ah_ = null;
+
+    this.tree_next_node_id_ = 0;
+  },
+
+  destroyed: function() {
+    if (this.filter_ !== null) {
+      this.builder_ah_.delete();
+      this.builder_.delete();
+      this.filter_ah_.delete();
+      this.filter_.destroy();
+      this.filter_.delete();
+    }
   },
 
   // Computed data
@@ -126,10 +140,11 @@ Vue.component('surf', {
       var levels = [];
       var nodes = [];
       var edges = [];
+      var base_node_id = this.tree_next_node_id_;
 
       var addNode = function(parent, level, key_offset, key_count) {
         var node = {
-          id: nodes.length,
+          id: base_node_id + nodes.length,
           label: '    ', // Required to correct change updates by vue2vis
           level: level,
           key_offset: key_offset,
@@ -176,8 +191,8 @@ Vue.component('surf', {
 
           edges.push(edge);
           parent.children[letter] = {
-            node_id: nodes.length - 1,
-            edge_id: edges.length - 1
+            node_idx: nodes.length - 1,
+            edge_idx: edges.length - 1
           };
         }
       };
@@ -214,6 +229,8 @@ Vue.component('surf', {
         }
         addNode(node, level + 1, common_key_offset, (key_offset + key_count) - common_key_offset);
       };
+
+      this.tree_next_node_id_ += nodes.length;
 
       return {
         full_nodes: full_nodes,
@@ -707,45 +724,45 @@ Vue.component('surf', {
           }
         };
         // Use initial coordinates that help layout engine order nodes in each level
-        nodes[i].x = nodes[i].id;
-        nodes[i].y = nodes[i].level;
+        // nodes[i].x = nodes[i].id;
+        // nodes[i].y = nodes[i].level;
       }
       for (i = 0; i < edges.length; i++) {
         edges[i].width = 1;
       }
 
       if (highlight) {
-        var node_id = 0;
+        var node_idx = 0;
         var i;
         for (i = 0; i < key.length; i++) {
-          var child = full_nodes[node_id].children[key[i]];
+          var child = full_nodes[node_idx].children[key[i]];
           if (child !== undefined) {
-            nodes[node_id].borderWidth = borderWidth;
-            nodes[node_id].font = traversalFont;
-            nodes[node_id].color = traversalColor;
-            edges[child.edge_id].width = borderWidth;
-            node_id = child.node_id;
+            nodes[node_idx].borderWidth = borderWidth;
+            nodes[node_idx].font = traversalFont;
+            nodes[node_idx].color = traversalColor;
+            edges[child.edge_idx].width = borderWidth;
+            node_idx = child.node_idx;
           } else {
             break;
           }
         }
         if (i == key.length) {
-          var child = full_nodes[node_id].children[Module.surf_kTerminator];
+          var child = full_nodes[node_idx].children[Module.surf_kTerminator];
           if (child !== undefined) {
-            nodes[node_id].borderWidth = borderWidth;
-            nodes[node_id].font = traversalFont;
-            nodes[node_id].color = traversalColor;
-            edges[child.edge_id].width = borderWidth;
-            node_id = child.node_id;
+            nodes[node_idx].borderWidth = borderWidth;
+            nodes[node_idx].font = traversalFont;
+            nodes[node_idx].color = traversalColor;
+            edges[child.edge_idx].width = borderWidth;
+            node_idx = child.node_idx;
           }
         }
-        nodes[node_id].borderWidth = borderWidth;
+        nodes[node_idx].borderWidth = borderWidth;
         if (result) {
-          nodes[node_id].font = successfulArrivalFont;
-          nodes[node_id].color = successfulArrivalColor;
+          nodes[node_idx].font = successfulArrivalFont;
+          nodes[node_idx].color = successfulArrivalColor;
         } else {
-          nodes[node_id].font = failedArrivalFont;
-          nodes[node_id].color = failedArrivalColor;
+          nodes[node_idx].font = failedArrivalFont;
+          nodes[node_idx].color = failedArrivalColor;
         }
       }
       return [nodes, edges];
