@@ -105,7 +105,17 @@
 				</b-col>
 
 				<b-col v-if="show_tree" class="h-100">
-					<network ref="network" :nodes="nodes_edges[0]" :edges="nodes_edges[1]" :options="options"></network>
+					<b-row>
+						<b-col>
+							<network ref="network" :nodes="nodes_edges[0]" :edges="nodes_edges[1]" :options="options"></network>
+						</b-col>
+					</b-row>
+
+					<b-row style="position: relative; top: -4em; text-align: center;">
+						<b-col>
+							Serialized size: {{ serialized_size }} bytes<br/> Memory use (including overhead): {{ memory_usage }} bytes
+						</b-col>
+					</b-row>
 				</b-col>
 
 				<b-col v-if="show_details" class="h-100" style="overflow: scroll;">
@@ -134,14 +144,6 @@
 
 					<b-container>
 						Sparse start level: {{ sparse_start_level }}
-					</b-container>
-
-					<b-container>
-						Serialized size: {{ serialized_size }} bytes
-					</b-container>
-
-					<b-container>
-						Memory usage (including overhead): {{ memory_usage }} bytes
 					</b-container>
 
 					<hr/>
