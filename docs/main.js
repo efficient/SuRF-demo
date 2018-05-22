@@ -710,8 +710,9 @@ Vue.component('surf', {
       while (i < this.keys.length) {
         var key = this.keys[i];
         if (range_query_end_inclusive) {
-          if (!(key <= range_query_end_key))
+          if (!(key <= range_query_end_key)) {
             break;
+          }
         } else {
           if (!(key < range_query_end_key)) {
             break;
