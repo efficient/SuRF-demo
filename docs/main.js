@@ -142,6 +142,11 @@ Vue.component('surf', {
       var edges = [];
       var base_node_id = this.tree_next_node_id_;
 
+      var suffix_labels;
+      if (this.suffix_type.length != 0) {
+        suffix_labels = this.getSuffixLabels().flatten();
+      }
+
       var addNode = function(parent, level, key_offset, key_count) {
         var node = {
           id: base_node_id + nodes.length,
@@ -154,7 +159,12 @@ Vue.component('surf', {
 
         if (key_count == 1) {
           node.suffix_id = suffix_id;
-          node.label = 's' + suffix_id;
+          if (suffix_labels === undefined) {
+            // node.label = '(s' + suffix_id + ')';
+            node.label = '\u2205';
+          } else {
+            node.label = suffix_labels[suffix_id];
+          }
           node.title = 'Suffix of key "' + keys[key_offset] + '"';
           node.shape = 'box';
           suffix_id++;
@@ -332,7 +342,8 @@ Vue.component('surf', {
         layout: {
           hierarchical: {
             sortMethod: 'directed',
-            levelSeparation: 120
+            levelSeparation: 120,
+            nodeSpacing: 120
           }
         },
         interaction: {
@@ -516,6 +527,9 @@ Vue.component('surf', {
           }
         }
       }
+      if (s.length != 0) {
+        s = s.slice(0, s.length - 1);
+      }
       return s;
     },
     formatBitvectorPartial: function(array, count, group_size) {
@@ -531,8 +545,46 @@ Vue.component('surf', {
           }
         }
       }
+      if (s.length != 0) {
+        s = s.slice(0, s.length - 1);
+      }
       return s;
     },
+    convertBinaryToLetters: function(array) {
+      var output = [];
+      for (var i = 0; i < array.length; i++) {
+        var binval = array[i];
+        var letters = '';
+        var printable = true;
+        for (var j = 0; j < binval.length; j += 8) {
+          var code = parseInt(binval.slice(j, j + 8), 2);
+          if (code < 0x20 || code > 0x7e) {
+            printable = false;
+            break;
+          }
+        }
+        for (var j = 0; j < binval.length; j += 8) {
+          var code = parseInt(binval.slice(j, j + 8), 2);
+          if (printable) {
+            letters += String.fromCharCode(code);
+          } else {
+            letters += code.toString(16);
+          }
+        }
+        if (letters.length == 0) {
+          letters = '\u2205';
+        } else if (!printable) {
+          if (letters.length % 2 == 0) {
+            letters = '0x' + letters;
+          } else {
+            letters = '0x0' + letters;
+          }
+        }
+        output.push(letters);
+      }
+      return output;
+    },
+
 
     // SuRF constants
     getTerminator: function() {
@@ -669,6 +721,26 @@ Vue.component('surf', {
         i++;
       }
       return [keys.length > 0, keys];
+    },
+
+    // Suffix labels for each suffix node
+    getSuffixLabels: function() {
+      var labels = [];
+      var suffixes = this.suffixes;
+      var suffix_counts = this.suffix_counts;
+      var suffix_len = this.actual_suffix_len;
+      var suffix_idx = 0;
+      var show_letter = this.suffix_type == 'real' && this.suffix_len % 8 == 0;
+      for (var index = 0; index < suffixes.length; index++) {
+        var array = suffixes[index];
+        var text = this.formatBitvectorPartial(array, suffix_counts[index] * suffix_len, suffix_len);
+        var level_labels = text.split(' ');
+        if (show_letter) {
+          level_labels = this.convertBinaryToLetters(level_labels);
+        }
+        labels.push(level_labels);
+      }
+      return labels;
     },
 
     // Node and edge highlighter

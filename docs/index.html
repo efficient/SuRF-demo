@@ -51,6 +51,7 @@
 						Suffix length:
 						<b-form-input v-model="suffix_len" type="number" :disabled="suffix_type.length == 0"></b-form-input>
 						<b-badge variant="danger" v-if="!(this.suffix_len >= 1 && this.suffix_len <= 64)">Must be an integer between 1 and 64</b-badge>
+						<b-badge variant="info" v-if="this.suffix_type == 'real' && this.suffix_len % 8 != 0">Need a multiple of 8 to display suffixes as letters</b-badge>
 					</div>
 
 					<hr/>
@@ -178,9 +179,13 @@
 					<b-container>
 						D-Values:
 						<b-container>
-							<template v-for="(array, index) in suffixes" v-if="index < sparse_start_level">
-								{{ formatBitvectorPartial(array, suffix_counts[index] * actual_suffix_len, actual_suffix_len) }}
+							<template v-for="(array, index) in suffixes" v-if="index < sparse_start_level"> {{ formatBitvectorPartial(array, suffix_counts[index] * actual_suffix_len, actual_suffix_len) }}
 							</template>
+							<!-- <template v-for="(array, index) in getSuffixLabels()" v-if="index < sparse_start_level">
+								<template v-for="label in array">
+									{{ label }}
+								</template>
+							</template> -->
 						</b-container>
 					</b-container>
 
@@ -221,6 +226,11 @@
 							<template v-for="(array, index) in suffixes" v-if="index >= sparse_start_level">
 								{{ formatBitvectorPartial(array, suffix_counts[index] * actual_suffix_len, actual_suffix_len) }}
 							</template>
+							<!-- <template v-for="(array, index) in getSuffixLabels()" v-if="index >= sparse_start_level">
+								<template v-for="label in array">
+									{{ label }}
+								</template>
+							</template> -->
 						</b-container>
 					</b-container>
 
