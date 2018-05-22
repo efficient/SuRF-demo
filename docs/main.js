@@ -662,8 +662,12 @@ Vue.component('surf', {
       if (this.surf.filter === null) {
         return [false, []];
       } else {
-        var keys = [];
+        var initial_key = '';
+        var matching_keys = [];
         var iter = this.surf.filter.moveToKeyGreaterThan(range_query_begin_key, range_query_begin_inclusive);
+        if (iter.isValid()) {
+          initial_key = iter.getKey();
+        }
         while (iter.isValid()) {
           var compare = iter.compare(range_query_end_key);
           if (compare == Module.surf_kCouldBePositive) {
@@ -677,15 +681,15 @@ Vue.component('surf', {
               break;
             }
           }
-          // Avoid using getKey() until it handles all corner cases
-          // keys.push(iter.getKey());
-          keys.push(range_query_begin_key);
-          // Do not continue iteration for now
-          break;
+          matching_keys.push(iter.getKey());
           iter.next(1); // 1 is a dummy argument
         }
         iter.delete();
-        return [keys.length > 0, keys];
+        if (matching_keys.length > 0) {
+          return [true, matching_keys];
+        } else {
+          return [false, [initial_key]];
+        }
       }
     },
 
@@ -695,7 +699,8 @@ Vue.component('surf', {
     },
     exactLookupRange: function(range_query_begin_key, range_query_begin_inclusive, range_query_end_key, range_query_end_inclusive) {
       var i;
-      var keys = [];
+      var initial_key = '';
+      var matching_keys = [];
       if (range_query_begin_inclusive) {
         for (i = 0; i < this.keys.length; i++) {
           var key = this.keys[i];
@@ -711,6 +716,9 @@ Vue.component('surf', {
           }
         }
       }
+      if (i < this.keys.length) {
+        initial_key = this.keys[i];
+      }
       while (i < this.keys.length) {
         var key = this.keys[i];
         if (range_query_end_inclusive) {
@@ -722,10 +730,14 @@ Vue.component('surf', {
             break;
           }
         }
-        keys.push(key);
+        matching_keys.push(key);
         i++;
       }
-      return [keys.length > 0, keys];
+      if (matching_keys.length > 0) {
+        return [true, matching_keys];
+      } else {
+        return [false, [initial_key]];
+      }
     },
 
     // Suffix labels for each suffix node
@@ -762,13 +774,7 @@ Vue.component('surf', {
           highlight = true;
           var lookup_result = this.lookupRange(this.range_query_begin_key, this.range_query_begin_inclusive, this.range_query_end_key, this.range_query_end_inclusive);
           result = lookup_result[0];
-          if (result) {
-            // Use keys from exact lookup results for highlighting temporarily
-            // keys = lookup_result[1];
-            keys = this.exactLookupRange(this.range_query_begin_key, this.range_query_begin_inclusive, this.range_query_end_key, this.range_query_end_inclusive)[1];
-          } else {
-            keys = [this.range_query_begin_key];
-          }
+          keys = lookup_result[1];
         }
       }
 
