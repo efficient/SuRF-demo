@@ -8153,61 +8153,62 @@ function __ZNK4surf10LoudsDense20moveToKeyGreaterThanERKNSt3__212basic_stringIcN
  $1 = $1|0;
  $2 = $2|0;
  $3 = $3|0;
- var $$053$lcssa = 0, $$05365 = 0, $$054 = 0, $$066 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0;
- var $26 = 0, $27 = 0, $28 = 0, $29 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ var $$054$lcssa = 0, $$05466 = 0, $$055 = 0, $$067 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0;
+ var $26 = 0, $27 = 0, $28 = 0, $29 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0;
+ var $9 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  $4 = HEAP32[$0>>2]|0;
  $5 = ($4|0)==(0);
  L1: do {
   if ($5) {
-   $$053$lcssa = 0;
+   $$054$lcssa = 0;
   } else {
    $6 = ((($1)) + 11|0);
    $7 = ((($1)) + 4|0);
    $8 = ((($0)) + 4|0);
    $9 = ((($0)) + 8|0);
-   $$05365 = 0;$$066 = 0;
+   $$05466 = 0;$$067 = 0;
    while(1) {
-    $10 = $$05365 << 8;
+    $10 = $$05466 << 8;
     $11 = HEAP8[$6>>0]|0;
     $12 = $11&255;
     $13 = $12 & 128;
     $14 = ($13|0)==(0);
     $15 = HEAP32[$7>>2]|0;
     $16 = $14 ? $12 : $15;
-    $17 = ($$066>>>0)<($16>>>0);
+    $17 = ($$067>>>0)<($16>>>0);
     if (!($17)) {
      label = 4;
      break;
     }
-    $21 = ($11<<24>>24)<(0);
-    $22 = HEAP32[$1>>2]|0;
-    $23 = $21 ? $22 : $1;
-    $24 = (($23) + ($$066)|0);
-    $25 = HEAP8[$24>>0]|0;
-    $26 = $25&255;
-    $27 = $10 | $26;
-    __ZN4surf10LoudsDense4Iter6appendEj($3,$27);
-    $28 = HEAP32[$8>>2]|0;
-    $29 = (__ZNK4surf9Bitvector7readBitEj($28,$27)|0);
-    if (!($29)) {
-     label = 6;
+    $24 = ($11<<24>>24)<(0);
+    $25 = HEAP32[$1>>2]|0;
+    $26 = $24 ? $25 : $1;
+    $27 = (($26) + ($$067)|0);
+    $28 = HEAP8[$27>>0]|0;
+    $29 = $28&255;
+    $30 = $10 | $29;
+    __ZN4surf10LoudsDense4Iter6appendEj($3,$30);
+    $31 = HEAP32[$8>>2]|0;
+    $32 = (__ZNK4surf9Bitvector7readBitEj($31,$30)|0);
+    if (!($32)) {
+     label = 9;
      break;
     }
-    $30 = HEAP32[$9>>2]|0;
-    $31 = (__ZNK4surf9Bitvector7readBitEj($30,$27)|0);
-    if (!($31)) {
-     label = 8;
+    $33 = HEAP32[$9>>2]|0;
+    $34 = (__ZNK4surf9Bitvector7readBitEj($33,$30)|0);
+    if (!($34)) {
+     label = 11;
      break;
     }
-    $34 = (__ZNK4surf10LoudsDense15getChildNodeNumEj($0,$27)|0);
-    $35 = (($$066) + 1)|0;
-    $36 = HEAP32[$0>>2]|0;
-    $37 = ($35>>>0)<($36>>>0);
-    if ($37) {
-     $$05365 = $34;$$066 = $35;
+    $37 = (__ZNK4surf10LoudsDense15getChildNodeNumEj($0,$30)|0);
+    $38 = (($$067) + 1)|0;
+    $39 = HEAP32[$0>>2]|0;
+    $40 = ($38>>>0)<($39>>>0);
+    if ($40) {
+     $$05466 = $37;$$067 = $38;
     } else {
-     $$053$lcssa = $34;
+     $$054$lcssa = $37;
      break L1;
     }
    }
@@ -8215,29 +8216,36 @@ function __ZNK4surf10LoudsDense20moveToKeyGreaterThanERKNSt3__212basic_stringIcN
     $18 = (($10) + -1)|0;
     $19 = (__ZNK4surf10LoudsDense10getNextPosEj($0,$18)|0);
     __ZN4surf10LoudsDense4Iter6appendEj($3,$19);
-    $20 = ((($3)) + 40|0);
-    HEAP8[$20>>0] = 1;
+    $20 = ((($0)) + 12|0);
+    $21 = HEAP32[$20>>2]|0;
+    $22 = (__ZNK4surf9Bitvector7readBitEj($21,$$05466)|0);
+    if ($22) {
+     $23 = ((($3)) + 40|0);
+     HEAP8[$23>>0] = 1;
+    } else {
+     __ZN4surf10LoudsDense4Iter17moveToLeftMostKeyEv($3);
+    }
     __ZN4surf10LoudsDense4Iter8setFlagsEbbbb($3,1,1,1,1);
-    $$054 = 1;
-    return ($$054|0);
+    $$055 = 1;
+    return ($$055|0);
    }
-   else if ((label|0) == 6) {
+   else if ((label|0) == 9) {
     __ZN4surf10LoudsDense4IterppEi($3,0);
-    $$054 = 0;
-    return ($$054|0);
+    $$055 = 0;
+    return ($$055|0);
    }
-   else if ((label|0) == 8) {
-    $32 = (($$066) + 1)|0;
-    $33 = (__ZNK4surf10LoudsDense24compareSuffixGreaterThanEjRKNSt3__212basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEjbRNS0_4IterE($0,$27,$1,$32,0,$3)|0);
-    $$054 = $33;
-    return ($$054|0);
+   else if ((label|0) == 11) {
+    $35 = (($$067) + 1)|0;
+    $36 = (__ZNK4surf10LoudsDense24compareSuffixGreaterThanEjRKNSt3__212basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEjbRNS0_4IterE($0,$30,$1,$35,0,$3)|0);
+    $$055 = $36;
+    return ($$055|0);
    }
   }
  } while(0);
- __ZN4surf10LoudsDense4Iter17setSendOutNodeNumEj($3,$$053$lcssa);
+ __ZN4surf10LoudsDense4Iter17setSendOutNodeNumEj($3,$$054$lcssa);
  __ZN4surf10LoudsDense4Iter8setFlagsEbbbb($3,1,0,1,1);
- $$054 = 1;
- return ($$054|0);
+ $$055 = 1;
+ return ($$055|0);
 }
 function __ZN4surf10LoudsDense4Iter6appendEj($0,$1) {
  $0 = $0|0;
@@ -8271,6 +8279,101 @@ function __ZNK4surf10LoudsDense10getNextPosEj($0,$1) {
  $4 = (__ZNK4surf9Bitvector20distanceToNextSetBitEj($3,$1)|0);
  $5 = (($4) + ($1))|0;
  return ($5|0);
+}
+function __ZN4surf10LoudsDense4Iter17moveToLeftMostKeyEv($0) {
+ $0 = $0|0;
+ var $$014 = 0, $$lcssa = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0;
+ var $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0;
+ var $44 = 0, $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ $1 = ((($0)) + 12|0);
+ $2 = HEAP32[$1>>2]|0;
+ $3 = (($2) + -1)|0;
+ $4 = ((($0)) + 28|0);
+ $5 = HEAP32[$4>>2]|0;
+ $6 = (($5) + ($3<<2)|0);
+ $7 = HEAP32[$6>>2]|0;
+ $8 = ((($0)) + 4|0);
+ $9 = HEAP32[$8>>2]|0;
+ $10 = ((($9)) + 8|0);
+ $11 = HEAP32[$10>>2]|0;
+ $12 = (__ZNK4surf9Bitvector7readBitEj($11,$7)|0);
+ if (!($12)) {
+  __ZN4surf10LoudsDense4Iter8setFlagsEbbbb($0,1,1,1,1);
+  return;
+ }
+ $13 = (__ZNK4surf10LoudsDense9getHeightEv($9)|0);
+ $14 = tempRet0;
+ $15 = (_i64Add(($13|0),($14|0),-1,-1)|0);
+ $16 = tempRet0;
+ $17 = ($16>>>0)>(0);
+ $18 = ($15>>>0)>($3>>>0);
+ $19 = ($16|0)==(0);
+ $20 = $19 & $18;
+ $21 = $17 | $20;
+ $22 = HEAP32[$8>>2]|0;
+ $23 = (__ZNK4surf10LoudsDense15getChildNodeNumEj($22,$7)|0);
+ L5: do {
+  if ($21) {
+   $$014 = $3;$41 = $23;
+   while(1) {
+    $38 = HEAP32[$8>>2]|0;
+    $39 = ((($38)) + 12|0);
+    $40 = HEAP32[$39>>2]|0;
+    $42 = (__ZNK4surf9Bitvector7readBitEj($40,$41)|0);
+    $43 = $41 << 8;
+    $44 = (($43) + -1)|0;
+    $36 = (__ZNK4surf10LoudsDense10getNextPosEj($38,$44)|0);
+    __ZN4surf10LoudsDense4Iter6appendEj($0,$36);
+    if ($42) {
+     label = 6;
+     break;
+    }
+    $24 = HEAP32[$8>>2]|0;
+    $46 = ((($24)) + 8|0);
+    $47 = HEAP32[$46>>2]|0;
+    $48 = (__ZNK4surf9Bitvector7readBitEj($47,$36)|0);
+    $31 = (($$014) + 1)|0;
+    if (!($48)) {
+     label = 8;
+     break;
+    }
+    $25 = (__ZNK4surf10LoudsDense9getHeightEv($24)|0);
+    $26 = tempRet0;
+    $27 = (_i64Add(($25|0),($26|0),-1,-1)|0);
+    $28 = tempRet0;
+    $29 = ($28>>>0)>(0);
+    $30 = ($27>>>0)>($31>>>0);
+    $32 = ($28|0)==(0);
+    $33 = $32 & $30;
+    $34 = $29 | $33;
+    $35 = HEAP32[$8>>2]|0;
+    $37 = (__ZNK4surf10LoudsDense15getChildNodeNumEj($35,$36)|0);
+    if ($34) {
+     $$014 = $31;$41 = $37;
+    } else {
+     $$lcssa = $37;
+     break L5;
+    }
+   }
+   if ((label|0) == 6) {
+    $45 = ((($0)) + 40|0);
+    HEAP8[$45>>0] = 1;
+    __ZN4surf10LoudsDense4Iter8setFlagsEbbbb($0,1,1,1,1);
+    return;
+   }
+   else if ((label|0) == 8) {
+    __ZN4surf10LoudsDense4Iter8setFlagsEbbbb($0,1,1,1,1);
+    return;
+   }
+  } else {
+   $$lcssa = $23;
+  }
+ } while(0);
+ $49 = ((($0)) + 8|0);
+ HEAP32[$49>>2] = $$lcssa;
+ __ZN4surf10LoudsDense4Iter8setFlagsEbbbb($0,1,1,0,1);
+ return;
 }
 function __ZN4surf10LoudsDense4Iter8setFlagsEbbbb($0,$1,$2,$3,$4) {
  $0 = $0|0;
@@ -8807,101 +8910,6 @@ function __ZN4surf10LoudsDense4Iter20setToLastLabelInRootEv($0) {
  $14 = (($13) + 1)|0;
  HEAP32[$12>>2] = $14;
  STACKTOP = sp;return;
-}
-function __ZN4surf10LoudsDense4Iter17moveToLeftMostKeyEv($0) {
- $0 = $0|0;
- var $$014 = 0, $$lcssa = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0;
- var $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0;
- var $44 = 0, $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
- sp = STACKTOP;
- $1 = ((($0)) + 12|0);
- $2 = HEAP32[$1>>2]|0;
- $3 = (($2) + -1)|0;
- $4 = ((($0)) + 28|0);
- $5 = HEAP32[$4>>2]|0;
- $6 = (($5) + ($3<<2)|0);
- $7 = HEAP32[$6>>2]|0;
- $8 = ((($0)) + 4|0);
- $9 = HEAP32[$8>>2]|0;
- $10 = ((($9)) + 8|0);
- $11 = HEAP32[$10>>2]|0;
- $12 = (__ZNK4surf9Bitvector7readBitEj($11,$7)|0);
- if (!($12)) {
-  __ZN4surf10LoudsDense4Iter8setFlagsEbbbb($0,1,1,1,1);
-  return;
- }
- $13 = (__ZNK4surf10LoudsDense9getHeightEv($9)|0);
- $14 = tempRet0;
- $15 = (_i64Add(($13|0),($14|0),-1,-1)|0);
- $16 = tempRet0;
- $17 = ($16>>>0)>(0);
- $18 = ($15>>>0)>($3>>>0);
- $19 = ($16|0)==(0);
- $20 = $19 & $18;
- $21 = $17 | $20;
- $22 = HEAP32[$8>>2]|0;
- $23 = (__ZNK4surf10LoudsDense15getChildNodeNumEj($22,$7)|0);
- L5: do {
-  if ($21) {
-   $$014 = $3;$41 = $23;
-   while(1) {
-    $38 = HEAP32[$8>>2]|0;
-    $39 = ((($38)) + 12|0);
-    $40 = HEAP32[$39>>2]|0;
-    $42 = (__ZNK4surf9Bitvector7readBitEj($40,$41)|0);
-    $43 = $41 << 8;
-    $44 = (($43) + -1)|0;
-    $36 = (__ZNK4surf10LoudsDense10getNextPosEj($38,$44)|0);
-    __ZN4surf10LoudsDense4Iter6appendEj($0,$36);
-    if ($42) {
-     label = 6;
-     break;
-    }
-    $24 = HEAP32[$8>>2]|0;
-    $46 = ((($24)) + 8|0);
-    $47 = HEAP32[$46>>2]|0;
-    $48 = (__ZNK4surf9Bitvector7readBitEj($47,$36)|0);
-    $31 = (($$014) + 1)|0;
-    if (!($48)) {
-     label = 8;
-     break;
-    }
-    $25 = (__ZNK4surf10LoudsDense9getHeightEv($24)|0);
-    $26 = tempRet0;
-    $27 = (_i64Add(($25|0),($26|0),-1,-1)|0);
-    $28 = tempRet0;
-    $29 = ($28>>>0)>(0);
-    $30 = ($27>>>0)>($31>>>0);
-    $32 = ($28|0)==(0);
-    $33 = $32 & $30;
-    $34 = $29 | $33;
-    $35 = HEAP32[$8>>2]|0;
-    $37 = (__ZNK4surf10LoudsDense15getChildNodeNumEj($35,$36)|0);
-    if ($34) {
-     $$014 = $31;$41 = $37;
-    } else {
-     $$lcssa = $37;
-     break L5;
-    }
-   }
-   if ((label|0) == 6) {
-    $45 = ((($0)) + 40|0);
-    HEAP8[$45>>0] = 1;
-    __ZN4surf10LoudsDense4Iter8setFlagsEbbbb($0,1,1,1,1);
-    return;
-   }
-   else if ((label|0) == 8) {
-    __ZN4surf10LoudsDense4Iter8setFlagsEbbbb($0,1,1,1,1);
-    return;
-   }
-  } else {
-   $$lcssa = $23;
-  }
- } while(0);
- $49 = ((($0)) + 8|0);
- HEAP32[$49>>2] = $$lcssa;
- __ZN4surf10LoudsDense4Iter8setFlagsEbbbb($0,1,1,0,1);
- return;
 }
 function __ZNK4surf10LoudsDense9getHeightEv($0) {
  $0 = $0|0;
@@ -10145,10 +10153,10 @@ function __ZNK4surf11LoudsSparse20moveToKeyGreaterThanERKNSt3__212basic_stringIc
  $1 = $1|0;
  $2 = $2|0;
  $3 = $3|0;
- var $$0 = 0, $$08698 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0;
- var $28 = 0, $29 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0, $44 = 0, $45 = 0, $46 = 0;
- var $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0, $55 = 0, $56 = 0, $57 = 0, $58 = 0, $59 = 0, $6 = 0, $60 = 0, $61 = 0, $62 = 0, $63 = 0, $64 = 0;
- var $65 = 0, $66 = 0, $67 = 0, $68 = 0, $69 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ var $$0 = 0, $$099$lcssa = 0, $$099114 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0;
+ var $27 = 0, $28 = 0, $29 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0, $44 = 0, $45 = 0;
+ var $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0, $55 = 0, $56 = 0, $57 = 0, $58 = 0, $59 = 0, $6 = 0, $60 = 0, $61 = 0, $62 = 0, $63 = 0;
+ var $64 = 0, $65 = 0, $66 = 0, $67 = 0, $68 = 0, $69 = 0, $7 = 0, $70 = 0, $71 = 0, $72 = 0, $73 = 0, $74 = 0, $75 = 0, $76 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
  $4 = sp;
@@ -10170,7 +10178,7 @@ function __ZNK4surf11LoudsSparse20moveToKeyGreaterThanERKNSt3__212basic_stringIc
  L1: do {
   if ($17) {
    $19 = ((($0)) + 20|0);
-   $$08698 = $8;$20 = $6;
+   $$099114 = $8;$20 = $6;
    while(1) {
     $21 = (__ZNK4surf11LoudsSparse8nodeSizeEj($0,$20)|0);
     $22 = HEAP32[$18>>2]|0;
@@ -10178,7 +10186,7 @@ function __ZNK4surf11LoudsSparse20moveToKeyGreaterThanERKNSt3__212basic_stringIc
     $24 = ($23<<24>>24)<(0);
     $25 = HEAP32[$1>>2]|0;
     $26 = $24 ? $25 : $1;
-    $27 = (($26) + ($$08698)|0);
+    $27 = (($26) + ($$099114)|0);
     $28 = HEAP8[$27>>0]|0;
     $29 = (__ZNK4surf11LabelVector6searchEhRjj($22,$28,$4,$21)|0);
     if (!($29)) {
@@ -10189,7 +10197,7 @@ function __ZNK4surf11LoudsSparse20moveToKeyGreaterThanERKNSt3__212basic_stringIc
     $38 = ($37<<24>>24)<(0);
     $39 = HEAP32[$1>>2]|0;
     $40 = $38 ? $39 : $1;
-    $41 = (($40) + ($$08698)|0);
+    $41 = (($40) + ($$099114)|0);
     $42 = HEAP8[$41>>0]|0;
     $43 = HEAP32[$4>>2]|0;
     __ZN4surf11LoudsSparse4Iter6appendEhj($3,$42,$43);
@@ -10202,7 +10210,7 @@ function __ZNK4surf11LoudsSparse20moveToKeyGreaterThanERKNSt3__212basic_stringIc
     $48 = (__ZNK4surf11LoudsSparse15getChildNodeNumEj($0,$43)|0);
     $49 = (__ZNK4surf11LoudsSparse16getFirstLabelPosEj($0,$48)|0);
     HEAP32[$4>>2] = $49;
-    $50 = (($$08698) + 1)|0;
+    $50 = (($$099114) + 1)|0;
     $51 = HEAP8[$9>>0]|0;
     $52 = $51&255;
     $53 = $52 & 128;
@@ -10211,9 +10219,9 @@ function __ZNK4surf11LoudsSparse20moveToKeyGreaterThanERKNSt3__212basic_stringIc
     $56 = $54 ? $52 : $55;
     $57 = ($50>>>0)<($56>>>0);
     if ($57) {
-     $$08698 = $50;$20 = $49;
+     $$099114 = $50;$20 = $49;
     } else {
-     $59 = $49;
+     $$099$lcssa = $50;$59 = $49;
      break L1;
     }
    }
@@ -10223,20 +10231,20 @@ function __ZNK4surf11LoudsSparse20moveToKeyGreaterThanERKNSt3__212basic_stringIc
     $32 = ($31<<24>>24)<(0);
     $33 = HEAP32[$1>>2]|0;
     $34 = $32 ? $33 : $1;
-    $35 = (($34) + ($$08698)|0);
+    $35 = (($34) + ($$099114)|0);
     $36 = HEAP8[$35>>0]|0;
     __ZNK4surf11LoudsSparse23moveToLeftInNextSubtrieEjjhRNS0_4IterE($0,$30,$21,$36,$3);
     $$0 = 0;
     STACKTOP = sp;return ($$0|0);
    }
    else if ((label|0) == 6) {
-    $46 = (($$08698) + 1)|0;
+    $46 = (($$099114) + 1)|0;
     $47 = (__ZNK4surf11LoudsSparse24compareSuffixGreaterThanEjRKNSt3__212basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEjbRNS0_4IterE($0,$43,$1,$46,0,$3)|0);
     $$0 = $47;
     STACKTOP = sp;return ($$0|0);
    }
   } else {
-   $59 = $6;
+   $$099$lcssa = $8;$59 = $6;
   }
  } while(0);
  $58 = HEAP32[$18>>2]|0;
@@ -10264,9 +10272,23 @@ function __ZNK4surf11LoudsSparse20moveToKeyGreaterThanERKNSt3__212basic_stringIc
    }
   }
  }
- HEAP8[$3>>0] = 1;
- $$0 = 1;
- STACKTOP = sp;return ($$0|0);
+ $70 = HEAP8[$9>>0]|0;
+ $71 = $70&255;
+ $72 = $71 & 128;
+ $73 = ($72|0)==(0);
+ $74 = HEAP32[$14>>2]|0;
+ $75 = $73 ? $71 : $74;
+ $76 = ($75>>>0)>($$099$lcssa>>>0);
+ if ($76) {
+  HEAP8[$3>>0] = 1;
+  $$0 = 1;
+  STACKTOP = sp;return ($$0|0);
+ } else {
+  __ZN4surf11LoudsSparse4Iter17moveToLeftMostKeyEv($3);
+  $$0 = 0;
+  STACKTOP = sp;return ($$0|0);
+ }
+ return (0)|0;
 }
 function __ZNK4surf11LoudsSparse4Iter15getStartNodeNumEv($0) {
  $0 = $0|0;
@@ -10411,6 +10433,112 @@ function __ZN4surf11LoudsSparse4IterppEi($0,$1) {
   __ZN4surf11LoudsSparse4Iter17moveToLeftMostKeyEv($0);
   return;
  }
+}
+function __ZN4surf11LoudsSparse4Iter17moveToLeftMostKeyEv($0) {
+ $0 = $0|0;
+ var $$02022 = 0, $$023 = 0, $$pre = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0;
+ var $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0;
+ var $43 = 0, $44 = 0, $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0, $55 = 0, $56 = 0, $57 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0;
+ var label = 0, sp = 0;
+ sp = STACKTOP;
+ $1 = ((($0)) + 16|0);
+ $2 = HEAP32[$1>>2]|0;
+ $3 = ($2|0)==(0);
+ $4 = ((($0)) + 4|0);
+ if ($3) {
+  $5 = HEAP32[$4>>2]|0;
+  $6 = ((($0)) + 12|0);
+  $7 = HEAP32[$6>>2]|0;
+  $8 = (__ZNK4surf11LoudsSparse16getFirstLabelPosEj($5,$7)|0);
+  $9 = HEAP32[$4>>2]|0;
+  $10 = ((($9)) + 16|0);
+  $11 = HEAP32[$10>>2]|0;
+  $12 = (__ZNK4surf11LabelVector4readEj($11,$8)|0);
+  __ZN4surf11LoudsSparse4Iter6appendEhj($0,$12,$8);
+  $$pre = HEAP32[$1>>2]|0;
+  $14 = $$pre;
+ } else {
+  $14 = $2;
+ }
+ $13 = (($14) + -1)|0;
+ $15 = ((($0)) + 32|0);
+ $16 = HEAP32[$15>>2]|0;
+ $17 = (($16) + ($13<<2)|0);
+ $18 = HEAP32[$17>>2]|0;
+ $19 = HEAP32[$4>>2]|0;
+ $20 = ((($19)) + 16|0);
+ $21 = HEAP32[$20>>2]|0;
+ $22 = (__ZNK4surf11LabelVector4readEj($21,$18)|0);
+ $23 = HEAP32[$4>>2]|0;
+ $24 = ((($23)) + 20|0);
+ $25 = HEAP32[$24>>2]|0;
+ $26 = (__ZNK4surf9Bitvector7readBitEj($25,$18)|0);
+ if ($26) {
+  $27 = (__ZNK4surf11LoudsSparse9getHeightEv($23)|0);
+  $28 = ($13>>>0)<($27>>>0);
+  if ($28) {
+   $$02022 = $18;$$023 = $13;
+  } else {
+   return;
+  }
+  while(1) {
+   $39 = HEAP32[$4>>2]|0;
+   $40 = (__ZNK4surf11LoudsSparse15getChildNodeNumEj($39,$$02022)|0);
+   $41 = HEAP32[$4>>2]|0;
+   $42 = (__ZNK4surf11LoudsSparse16getFirstLabelPosEj($41,$40)|0);
+   $43 = HEAP32[$4>>2]|0;
+   $44 = ((($43)) + 16|0);
+   $45 = HEAP32[$44>>2]|0;
+   $46 = (__ZNK4surf11LabelVector4readEj($45,$42)|0);
+   $47 = HEAP32[$4>>2]|0;
+   $48 = ((($47)) + 20|0);
+   $49 = HEAP32[$48>>2]|0;
+   $50 = (__ZNK4surf9Bitvector7readBitEj($49,$42)|0);
+   __ZN4surf11LoudsSparse4Iter6appendEhj($0,$46,$42);
+   $37 = (($$023) + 1)|0;
+   if (!($50)) {
+    break;
+   }
+   $35 = HEAP32[$4>>2]|0;
+   $36 = (__ZNK4surf11LoudsSparse9getHeightEv($35)|0);
+   $38 = ($37>>>0)<($36>>>0);
+   if ($38) {
+    $$02022 = $42;$$023 = $37;
+   } else {
+    label = 14;
+    break;
+   }
+  }
+  if ((label|0) == 14) {
+   return;
+  }
+  $51 = ($46<<24>>24)==(-1);
+  if ($51) {
+   $52 = HEAP32[$4>>2]|0;
+   $53 = ((($52)) + 24|0);
+   $54 = HEAP32[$53>>2]|0;
+   $55 = (($42) + 1)|0;
+   $56 = (__ZNK4surf9Bitvector7readBitEj($54,$55)|0);
+   if (!($56)) {
+    $57 = ((($0)) + 44|0);
+    HEAP8[$57>>0] = 1;
+   }
+  }
+ } else {
+  $29 = ($22<<24>>24)==(-1);
+  if ($29) {
+   $30 = ((($23)) + 24|0);
+   $31 = HEAP32[$30>>2]|0;
+   $32 = (($18) + 1)|0;
+   $33 = (__ZNK4surf9Bitvector7readBitEj($31,$32)|0);
+   if (!($33)) {
+    $34 = ((($0)) + 44|0);
+    HEAP8[$34>>0] = 1;
+   }
+  }
+ }
+ HEAP8[$0>>0] = 1;
+ return;
 }
 function __ZNK4surf11LoudsSparse14serializedSizeEv($0) {
  $0 = $0|0;
@@ -10665,112 +10793,6 @@ function __ZN4surf11LoudsSparse4Iter6appendEj($0,$1) {
  $16 = HEAP32[$7>>2]|0;
  $17 = (($16) + 1)|0;
  HEAP32[$7>>2] = $17;
- return;
-}
-function __ZN4surf11LoudsSparse4Iter17moveToLeftMostKeyEv($0) {
- $0 = $0|0;
- var $$02022 = 0, $$023 = 0, $$pre = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0;
- var $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0;
- var $43 = 0, $44 = 0, $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0, $55 = 0, $56 = 0, $57 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0;
- var label = 0, sp = 0;
- sp = STACKTOP;
- $1 = ((($0)) + 16|0);
- $2 = HEAP32[$1>>2]|0;
- $3 = ($2|0)==(0);
- $4 = ((($0)) + 4|0);
- if ($3) {
-  $5 = HEAP32[$4>>2]|0;
-  $6 = ((($0)) + 12|0);
-  $7 = HEAP32[$6>>2]|0;
-  $8 = (__ZNK4surf11LoudsSparse16getFirstLabelPosEj($5,$7)|0);
-  $9 = HEAP32[$4>>2]|0;
-  $10 = ((($9)) + 16|0);
-  $11 = HEAP32[$10>>2]|0;
-  $12 = (__ZNK4surf11LabelVector4readEj($11,$8)|0);
-  __ZN4surf11LoudsSparse4Iter6appendEhj($0,$12,$8);
-  $$pre = HEAP32[$1>>2]|0;
-  $14 = $$pre;
- } else {
-  $14 = $2;
- }
- $13 = (($14) + -1)|0;
- $15 = ((($0)) + 32|0);
- $16 = HEAP32[$15>>2]|0;
- $17 = (($16) + ($13<<2)|0);
- $18 = HEAP32[$17>>2]|0;
- $19 = HEAP32[$4>>2]|0;
- $20 = ((($19)) + 16|0);
- $21 = HEAP32[$20>>2]|0;
- $22 = (__ZNK4surf11LabelVector4readEj($21,$18)|0);
- $23 = HEAP32[$4>>2]|0;
- $24 = ((($23)) + 20|0);
- $25 = HEAP32[$24>>2]|0;
- $26 = (__ZNK4surf9Bitvector7readBitEj($25,$18)|0);
- if ($26) {
-  $27 = (__ZNK4surf11LoudsSparse9getHeightEv($23)|0);
-  $28 = ($13>>>0)<($27>>>0);
-  if ($28) {
-   $$02022 = $18;$$023 = $13;
-  } else {
-   return;
-  }
-  while(1) {
-   $39 = HEAP32[$4>>2]|0;
-   $40 = (__ZNK4surf11LoudsSparse15getChildNodeNumEj($39,$$02022)|0);
-   $41 = HEAP32[$4>>2]|0;
-   $42 = (__ZNK4surf11LoudsSparse16getFirstLabelPosEj($41,$40)|0);
-   $43 = HEAP32[$4>>2]|0;
-   $44 = ((($43)) + 16|0);
-   $45 = HEAP32[$44>>2]|0;
-   $46 = (__ZNK4surf11LabelVector4readEj($45,$42)|0);
-   $47 = HEAP32[$4>>2]|0;
-   $48 = ((($47)) + 20|0);
-   $49 = HEAP32[$48>>2]|0;
-   $50 = (__ZNK4surf9Bitvector7readBitEj($49,$42)|0);
-   __ZN4surf11LoudsSparse4Iter6appendEhj($0,$46,$42);
-   $37 = (($$023) + 1)|0;
-   if (!($50)) {
-    break;
-   }
-   $35 = HEAP32[$4>>2]|0;
-   $36 = (__ZNK4surf11LoudsSparse9getHeightEv($35)|0);
-   $38 = ($37>>>0)<($36>>>0);
-   if ($38) {
-    $$02022 = $42;$$023 = $37;
-   } else {
-    label = 14;
-    break;
-   }
-  }
-  if ((label|0) == 14) {
-   return;
-  }
-  $51 = ($46<<24>>24)==(-1);
-  if ($51) {
-   $52 = HEAP32[$4>>2]|0;
-   $53 = ((($52)) + 24|0);
-   $54 = HEAP32[$53>>2]|0;
-   $55 = (($42) + 1)|0;
-   $56 = (__ZNK4surf9Bitvector7readBitEj($54,$55)|0);
-   if (!($56)) {
-    $57 = ((($0)) + 44|0);
-    HEAP8[$57>>0] = 1;
-   }
-  }
- } else {
-  $29 = ($22<<24>>24)==(-1);
-  if ($29) {
-   $30 = ((($23)) + 24|0);
-   $31 = HEAP32[$30>>2]|0;
-   $32 = (($18) + 1)|0;
-   $33 = (__ZNK4surf9Bitvector7readBitEj($31,$32)|0);
-   if (!($33)) {
-    $34 = ((($0)) + 44|0);
-    HEAP8[$34>>0] = 1;
-   }
-  }
- }
- HEAP8[$0>>0] = 1;
  return;
 }
 function __ZN4surf11LoudsSparse4Iter5clearEv($0) {
