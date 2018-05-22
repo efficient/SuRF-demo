@@ -677,7 +677,11 @@ Vue.component('surf', {
               break;
             }
           }
-          keys.push(iter.getKey());
+          // Avoid using getKey() until it handles all corner cases
+          // keys.push(iter.getKey());
+          keys.push(range_query_begin_key);
+          // Do not continue iteration for now
+          break;
           iter.next(1); // 1 is a dummy argument
         }
         iter.delete();
@@ -759,7 +763,9 @@ Vue.component('surf', {
           var lookup_result = this.lookupRange(this.range_query_begin_key, this.range_query_begin_inclusive, this.range_query_end_key, this.range_query_end_inclusive);
           result = lookup_result[0];
           if (result) {
-            keys = lookup_result[1];
+            // Use keys from exact lookup results for highlighting temporarily
+            // keys = lookup_result[1];
+            keys = this.exactLookupRange(this.range_query_begin_key, this.range_query_begin_inclusive, this.range_query_end_key, this.range_query_end_inclusive)[1];
           } else {
             keys = [this.range_query_begin_key];
           }
