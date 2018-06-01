@@ -664,7 +664,12 @@ Vue.component('surf', {
       } else {
         var initial_key = '';
         var matching_keys = [];
-        var iter = this.surf.filter.moveToKeyGreaterThan(range_query_begin_key, range_query_begin_inclusive);
+        var iter;
+        if (range_query_begin_key == '') {
+          iter = this.surf.filter.moveToFirst();
+        } else {
+          iter = this.surf.filter.moveToKeyGreaterThan(range_query_begin_key, range_query_begin_inclusive);
+        }
         if (iter.isValid()) {
           initial_key = iter.getKey();
         }
