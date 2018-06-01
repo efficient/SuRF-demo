@@ -48,7 +48,7 @@
 					</div>
 
 					<div>
-						Suffix length:
+						Suffix length (bits):
 						<b-form-input v-model="suffix_len" type="number" :disabled="suffix_type.length == 0"></b-form-input>
 						<b-badge variant="danger" v-if="!(this.suffix_len >= 1 && this.suffix_len <= 64)">Must be an integer between 1 and 64</b-badge>
 						<b-badge variant="info" v-if="this.suffix_type == 'real' && this.suffix_len % 8 != 0">Need a multiple of 8 to display suffixes as letters</b-badge>
@@ -67,7 +67,7 @@
 
 					<div v-if="query_type == 'point'">
 						<div>
-							Key:
+							Query key:
 							<b-form-input v-model="point_query_key"></b-form-input>
 						</div>
 						<div>
@@ -81,12 +81,12 @@
 
 					<div v-if="query_type == 'range'">
 						<div>
-							Start key:
+							Query start key:
 							<!-- <b-form-checkbox v-model="range_query_begin_inclusive">inclusive</b-form-checkbox> -->
 							<b-form-input v-model="range_query_begin_key"></b-form-input>
 						</div>
 						<div>
-							End key:
+							Query end key:
 							<!-- <b-form-checkbox v-model="range_query_end_inclusive">inclusive</b-form-checkbox> -->
 							<b-form-input v-model="range_query_end_key"></b-form-input>
 						</div>
@@ -128,7 +128,7 @@
 					</b-container>
 
 					<b-container>
-						<b-form-checkbox v-model="include_dense">Include dense</b-form-checkbox>
+						<b-form-checkbox v-model="include_dense">Include LOUDS-dense</b-form-checkbox>
 					</b-container>
 
 					<b-container>
