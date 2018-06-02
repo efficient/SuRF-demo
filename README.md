@@ -3,7 +3,7 @@
 An interactive demo app for the **Succinct Range Filter (SuRF)**.
 
  * [SIGMOD paper](http://www.cs.cmu.edu/%7Ehuanche1/publications/surf\_paper.pdf)
- * [SuRF](https://github.com/efficient/SuRF)
+ * [SuRF C++ implementation](https://github.com/efficient/SuRF)
 
 
 ## Run
