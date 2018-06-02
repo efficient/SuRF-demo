@@ -67,6 +67,7 @@ Vue.component('surf', {
       'range_query_begin_inclusive': this.initial_range_query_begin_inclusive,
       'range_query_end_key': this.initial_range_query_end_key,
       'range_query_end_inclusive': this.initial_range_query_end_inclusive,
+      'show_help': false,
       'show_tree': this.initial_show_tree,
       'show_details': this.initial_show_details,
     };

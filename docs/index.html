@@ -27,12 +27,39 @@
 		<b-container fluid>
 			<b-row class="h-100">
 				<b-col style="max-width: 20em;">
-					<h1>SuRF Demo</h1>
-
 					<div class="float-right">
-						<b-badge variant="primary" href="http://www.cs.cmu.edu/%7Ehuanche1/publications/surf_paper.pdf" target="_new">PDF</b-badge>
-						<b-badge variant="primary" href="https://github.com/efficient/SuRF-demo" target="_new">GitHub</b-badge>
+						<b-badge variant="primary" href="https://doi.org/10.1145/3183713.3196931" target="_new">PDF</b-badge>
+						<b-badge variant="primary" href="https://github.com/efficient/SuRF" target="_new">GitHub</b-badge>
+						<b-badge variant="dark" href="#" @click="show_help = true">Info</b-badge>
 					</div>
+
+					<h1>SuRF</h1>
+
+					<b-modal v-model="show_help" ok-only title="SuRF Information">
+						<p>
+							The Succinct Range Filter (SuRF) is a fast and compact data structure for approximate membership tests. It answers:
+						</p>
+						<ul>
+							<li> Does a query key likely exist in the input keys?</li>
+							<li> Does a query key range likely have any matching key in the input keys?</li>
+						</ul>
+
+						<p>
+							SuRF may return false positives ("true" when no matching actually exists). Using (especially long) suffixes may reduce false positives.
+						</p>
+
+						<p>
+							<a href="https://github.com/efficient/SuRF-demo" target="_new">This demo</a> uses the <a href="https://github.com/efficient/SuRF" target="_new">SuRF C++ implementation</a> compiled into Javascript.
+						</p>
+
+						<p>
+							Please see <a href="https://doi.org/10.1145/3183713.3196931" target="_new">our SIGMOD paper</a> for more information.
+						</p>
+
+						<p>
+							Copyright 2018, Carnegie Mellon University
+						</p>
+					</b-modal>
 
 					<div>
 						Input (one key per line):
@@ -249,12 +276,6 @@
 							Level-{{ index }}:&nbsp;{{ value }}
 						</b-container>
 					</b-container> -->
-
-					<hr/>
-
-					<b-container>
-						Copyright 2018, Carnegie Mellon University
-					</b-container>
 				</b-col>
 			</b-row>
 		</b-container>
