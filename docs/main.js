@@ -28,7 +28,7 @@ Vue.component('surf', {
       default: '8'
     },
     'initial_query_type': {
-      'default': 'none'
+      'default': 'range'
     },
     'initial_point_query_key': {
       'default': ''
