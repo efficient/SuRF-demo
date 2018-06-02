@@ -94,7 +94,7 @@
 
 					<div v-if="query_type == 'point'">
 						<div>
-							Query key:
+							Lookup key:
 							<b-form-input v-model="point_query_key"></b-form-input>
 						</div>
 						<div>
@@ -108,12 +108,12 @@
 
 					<div v-if="query_type == 'range'">
 						<div>
-							Query start key:
+							Range start key:
 							<!-- <b-form-checkbox v-model="range_query_begin_inclusive">inclusive</b-form-checkbox> -->
 							<b-form-input v-model="range_query_begin_key"></b-form-input>
 						</div>
 						<div>
-							Query end key:
+							Range end key:
 							<!-- <b-form-checkbox v-model="range_query_end_inclusive">inclusive</b-form-checkbox> -->
 							<b-form-input v-model="range_query_end_key"></b-form-input>
 						</div>
